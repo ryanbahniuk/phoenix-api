@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    ports:
+      - "4000:4000"
+    working_dir: "/Users/ryanbahniuk/Code/phoenix_api"
+    volumes:
+      - .:/Users/ryanbahniuk/Code/phoenix_api
+    depends_on:
+      - db
+  db:
+    image: "postgres:9.6.3"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+volumes:
+  db-data:

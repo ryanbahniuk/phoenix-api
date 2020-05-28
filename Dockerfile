@@ -1,8 +1,7 @@
-FROM elixir:latest
+FROM elixir:1.10.3
 MAINTAINER ryan.bahniuk@gmail.com
 
 ENV HOME=/Users/ryanbahniuk/Code/phoenix_api
-ADD . $HOME
 WORKDIR $HOME
 
 RUN apt-get update && apt-get upgrade -y && \
@@ -11,3 +10,9 @@ RUN apt-get update && apt-get upgrade -y && \
     mix local.hex --force
 
 EXPOSE 4000
+
+COPY ./entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
+
+ADD . $HOME
